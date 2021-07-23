@@ -1,0 +1,20 @@
+<?php
+                            $tanggalBatas = $row["batas_pengembalian_buku"];
+                            $timeTanggalBatas = strtotime("$tanggalBatas");
+                            $timeHariIni = time();
+                            // echo date("d - M - Y", $timeTanggal);
+                            //  echo time() + (60*60*24*2);
+                        ?>
+
+                        <?php if( $timeHariIni > $timeTanggalBatas && $row["status"] != "SUDAH KEMBALI" ) : ?>
+                            <td style="background-color: red"><?= $row["batas_pengembalian_buku"]; ?></td>
+                        <?php else : ?>
+                            <td style="background-color: lightgreen"><?= $row["batas_pengembalian_buku"]; ?></td>
+                        <?php endif; ?>
+
+                        <td><?= $row["status"]; ?></td>
+                        <?php if( $row["status"] == "SUDAH KEMBALI" ) : ?>
+                            <td align="center"><a href="hapusPeminjaman.php?id_transaksi_pinjam_buku=<?=$row['id_transaksi_pinjam_buku'];?>" onclick="return confirm('Yakin Kawan?')">Hapus</a></td>
+                        <?php else : ?>
+                            <td align="center"><a href="editPeminjaman.php?id_transaksi_pinjam_buku=<?=$row['id_transaksi_pinjam_buku'];?>">Edit</a> | <a href="hapusPeminjaman.php?id_transaksi_pinjam_buku=<?=$row['id_transaksi_pinjam_buku'];?>" onclick="return confirm('Yakin Kawan?')">Hapus</a></td>
+                        <?php endif; ?>
